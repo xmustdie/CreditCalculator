@@ -21,9 +21,9 @@ namespace WindowsFormsApp1
         private void button1_Click(object sender, EventArgs e)
         {
             label4.Text = "Что то происходит";
-            double SumOfCredit = Double.Parse(textBox1.Text, CultureInfo.InvariantCulture) ;
-            double InterestRate = Double.Parse(textBox2.Text, CultureInfo.InvariantCulture);
-            double CreditPeriod = Double.Parse(textBox3.Text, CultureInfo.InvariantCulture);
+            double SumOfCredit = Double.Parse(inputSumOfCredit.Text, CultureInfo.InvariantCulture) ;
+            double InterestRate = Double.Parse(inputProcent.Text, CultureInfo.InvariantCulture);
+            double CreditPeriod = Double.Parse(inputCreditPeriod.Text, CultureInfo.InvariantCulture);
             double MainPayment = SumOfCredit / CreditPeriod; // платеж по основному долгу
                                                            
             for (int i = 0; i < CreditPeriod; ++i)
@@ -50,22 +50,21 @@ namespace WindowsFormsApp1
         private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
         {
             char number = e.KeyChar;
-            if (!Char.IsDigit(number) && number != 8) // цифры, клавиша BackSpace
-            {
-                e.Handled = true;
-            }
-
-        }
-
-        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            char number = e.KeyChar;
             if (!Char.IsDigit(number) && number != 8 && number != 44 && number != 46) // цифры, клавиша BackSpace, точка и запятая
             {
                 e.Handled = true;
                 return;
             }
-            if ((textBox3.Text.Contains(".") || textBox3.Text.Contains(",")) && (number == 44 || number == 46))
+            if ((inputCreditPeriod.Text.Contains(".") || inputCreditPeriod.Text.Contains(",")) && (number == 44 || number == 46))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsDigit(number) && number != 8) // цифры, клавиша BackSpace
             {
                 e.Handled = true;
             }
@@ -83,6 +82,11 @@ namespace WindowsFormsApp1
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }
